@@ -1,11 +1,9 @@
-# be-arinze-umunnah 
-A RESTful API that mimick a simple clone of Stackoverflow. To limit 
-scope, there are 3 modules implemented:
+# NodeJs RestApi and GraphQl
+A RESTful API for book sells
 1. Authentication
-2. Questions (asking and replying)
-3. Rating (upvoting/downvoting)
-4. Subscription (A user can subscribe to a question and get a 
-notification when the question is answered)
+2. Books
+3. Rating (likes/dislikes)
+4. Cart(adding books to cart)
 
 
 ## Getting Started
@@ -18,6 +16,7 @@ What things you need to install the software and how to install them.
 
 ```
 Node Js(Typescript)
+GraphQl
 Code Editor (This app was built on VSCode)
 Git
 Postgres
