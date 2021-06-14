@@ -1,7 +1,6 @@
 "use strict";
 
 import { Model, UUIDV4} from "sequelize";
-import sequelize from "sequelize/types/lib/sequelize";
 import { Field, ObjectType} from 'type-graphql';
 import models from ".";
 

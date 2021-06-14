@@ -1,6 +1,7 @@
 'use strict';
 
 import  {Model} from "sequelize";
+import { Field,ObjectType} from 'type-graphql';
 
 
 interface BookAttributes {
@@ -19,18 +20,31 @@ interface BookAttributes {
 }
 
 module.exports = (sequelize: any, DataTypes:any) => {
+  @ObjectType()
   class Book extends Model<BookAttributes> implements BookAttributes {
+    @Field()
     id!: number;
+    @Field()
     title!: string;
+    @Field()
     description!: string;
+    @Field()
     quantity!: number;
+    @Field()
     flag!: boolean;
+    @Field()
     price!: number;
+    @Field()
     currency!: string;
+    @Field()
     genre!: string;
+    @Field()
     tags!: string;
+    @Field()
     author!: string;
+    @Field()
     image!: string;
+    @Field()
     userId!: string;
     /**
      * Helper method for defining associations.
