@@ -39,7 +39,7 @@ class UserRepository {
 
 	async getUser(id: string) {
 		try {
-			const user = await this.model.findOne({ where: { id: id } });
+			const user = await this.model.findOne({ where: { id: id }});
 			if (user != null) return user;
 			throw new ModelNotFoundException("User", id);
 		} catch (err) {

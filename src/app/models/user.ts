@@ -1,6 +1,9 @@
 "use strict";
 
 import { Model, UUIDV4} from "sequelize";
+import sequelize from "sequelize/types/lib/sequelize";
+import { Field, ObjectType} from 'type-graphql';
+import models from ".";
 
 interface UserAttributes {
 	id: string;
@@ -11,10 +14,15 @@ interface UserAttributes {
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
+	@ObjectType()
 	class User extends Model<UserAttributes> implements UserAttributes {
+		@Field()
 		id!: string;
+		@Field()
 		firstName!: string;
+		@Field()
 		lastName!: string;
+		@Field()
 		email!: string;
 		password!: string;
 		/**
@@ -24,10 +32,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
 		 */
 		static associate(models: any) {
 		  // define association here
-		  this.hasMany(models.Question, {sourceKey:'id',foreignKey:'userId',as:'questions'}),
-      this.hasMany(models.Answer, {sourceKey:'id',foreignKey:'userId',as:'answers'})
+		  this.hasMany(models.Book, {sourceKey:'id',foreignKey:'userId',as:'books'}),
 			this.hasMany(models.Vote, {sourceKey:'id',foreignKey:'userId',as:'votes'})
-			this.hasMany(models.Subscription, {sourceKey:'id',foreignKey:'userId',as:'subscriptions'})
 		}
 
 		toJSON() {

@@ -1,8 +1,8 @@
 import { check, param} from "express-validator";
 import { ModelNotFoundException } from "../../libraries/exceptions";
-import AnswerRepository from "../repository/answer.repository";
+import BookRepository from "../repository/book.repository";
 
-const answerRepository = new AnswerRepository();
+const bookRepository = new BookRepository();
 
 export default {
 	create: [
@@ -12,28 +12,28 @@ export default {
 			.isIn([-1, 1])
 			.withMessage("Value must either be 1 or -1"),
 
-		check("answerId")
+		check("bookId")
 			.isNumeric()
-			.withMessage("Answer Id is required")
-			.custom(async (answerId: number) => {
+			.withMessage("book Id is required")
+			.custom(async (bookId: number) => {
 				try {
-					await answerRepository.getAnswer(answerId);
+					await bookRepository.getBook(bookId);
 					return true;
 				} catch (e) {
-					throw new ModelNotFoundException("Answer", answerId);
+					throw new ModelNotFoundException("book", bookId);
 				}
 			}),
 	],
-	getAnswerVote: [
-		param('answerId')
+	getbookVote: [
+		param('bookId')
 		.isNumeric()
-		.withMessage("Answer Id is required")
-		.custom(async (answerId: number) => {
+		.withMessage("book Id is required")
+		.custom(async (bookId: number) => {
 			try {
-				await answerRepository.getAnswer(answerId);
+				await bookRepository.getBook(bookId);
 				return true;
 			} catch (e) {
-				throw new ModelNotFoundException("Answer", answerId);
+				throw new ModelNotFoundException("book", bookId);
 			}
 		}),
 	]

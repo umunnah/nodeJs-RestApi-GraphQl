@@ -1,10 +1,13 @@
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
+import  { ApolloServer} from 'apollo-server-express';
+import {buildSchema} from 'type-graphql'
 // import helmet from 'helmet'; 
 import db from '../app/models';
 import ErrorHandler from '../app/exceptions';
 import routes from '../routes';
+import { UserResolver} from '../app/graphQl/resolvers'
 
 
 
@@ -16,8 +19,8 @@ class App {
 
 		this.setup();
 		this.database();
-		this.authentication();
 		this.routers();
+		this.graphQl();
 	}
 
 	setup() {
@@ -37,7 +40,17 @@ class App {
 		this.app.use(ErrorHandler);
 	}
 
-	authentication() {}
+	async graphQl() {
+		const apolloServer =  new ApolloServer({
+			schema: await buildSchema({
+				resolvers: [
+					UserResolver
+				]
+			}),
+			context: ({req, res}) => ({req, res})
+		});
+		apolloServer.applyMiddleware({app:this.app});
+	}
 }
 
 export default new App().app;

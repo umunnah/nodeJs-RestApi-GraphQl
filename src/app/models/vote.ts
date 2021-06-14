@@ -6,7 +6,7 @@ import  {Model} from "sequelize";
 interface VoteAttributes {
   id: number;
   userId: string;
-  answerId: number;
+  bookId: number;
   value: number;
 }
 
@@ -14,7 +14,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
   class Vote extends Model<VoteAttributes> implements VoteAttributes{
     id!: number;
     userId!: string;
-    answerId!: number;
+    bookId!: number;
     value!: number;
     /**
      * Helper method for defining associations.
@@ -24,7 +24,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     static associate(models: any) {
       // define association here
       this.belongsTo(models.User, {foreignKey:'userId'})
-      this.belongsTo(models.Answer, {foreignKey:'answerId'})
+      this.belongsTo(models.Book, {foreignKey:'bookId'})
     }
   };
   Vote.init({
@@ -42,7 +42,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    answerId: {
+    bookId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
