@@ -12,7 +12,8 @@ class BookController {
 
 	async create(req: Request, res: Response, next: NextFunction) {
 		try {
-			const book = await this.bookService.create(req);
+			req.body.userId = req.user.id;
+			const book = await this.bookService.create(req.body);
 			res.status(201).json({'message':'success', 'data':book });
 		} catch (e) {
 			next(e);

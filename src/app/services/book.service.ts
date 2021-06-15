@@ -9,10 +9,7 @@ class BookService {
     this.getBook = this.getBook.bind(this);
   }
 
-  async create(req: any){
-    const {title,content} = req.body;
-    const userId = req.user.id;
-    const data = {title,content,'userId':userId}
+  async create(data: {}){
     return await this.bookRepository.create(data);
   }
 

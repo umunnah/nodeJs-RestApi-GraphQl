@@ -7,7 +7,7 @@ import {buildSchema} from 'type-graphql'
 import db from '../app/models';
 import ErrorHandler from '../app/exceptions';
 import routes from '../routes';
-import { UserResolver} from '../app/graphQl/resolvers'
+import { UserResolver, BookResolver} from '../app/graphQl/resolvers'
 
 
 
@@ -44,7 +44,8 @@ class App {
 		const apolloServer =  new ApolloServer({
 			schema: await buildSchema({
 				resolvers: [
-					UserResolver
+					UserResolver,
+					BookResolver
 				]
 			}),
 			context: ({req, res}) => ({req, res})

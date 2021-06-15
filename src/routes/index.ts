@@ -41,7 +41,7 @@ router.post(
 );
 router.get("/profile", Authorization, authController.profile);
 
-// all routes for question controller
+// all routes for book controller
 router.post(
 	"/book",
 	Authorization,

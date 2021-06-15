@@ -22,6 +22,7 @@ export  class UserResolver {
   async profile(
     @Ctx() {user}: Context
   ): Promise<any> {
+    await userService.getUser(user!.id);
     return user;
   }
 

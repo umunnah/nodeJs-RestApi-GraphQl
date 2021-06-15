@@ -17,17 +17,33 @@ export class BookResolver {
     return book;
   }
 
+  @Query(() => [Book])
+  async books(
+    @Ctx() {req}: Context
+  ): Promise<any> {
+    const result = await bookService.getBooks(req);
+    return result;
+  }
+
   @Mutation(() => Book)
   @UseMiddleware(authorization) 
   async create(
-    @Arg('email') email: string,
-    @Arg('first_name') first_name: string,
-    @Arg('last_name') last_name: string,
-    @Arg('password') password: string,
+    @Arg('title') title: string,
+    @Arg('description') description: string,
+    @Arg('quantity') quantity: number,
+    @Arg('flag') flag: string,
+    @Arg('price') price: number,
+    @Arg('currency') currency: string,
+    @Arg('genre') genre: string,
+    @Arg('tags') tags: string,
+    @Arg('image') image: string,
+    @Arg('author') author: string,
     @Ctx() {user}: Context
   ): Promise<any>{
     try {
-      const book = await bookService.create({email,first_name,last_name,password});
+      const book = await bookService.create({
+        title,description,quantity,flag,price,currency,genre,tags,image,author,userId:user!.id
+      });
       return book;
     } catch(e) {
      throw new Error(e.message); 
